@@ -3,6 +3,7 @@ using AutomationFramework.Browser;
 //using SeleniumExtras.PageObjects;
 using Protractor;
 using AutomationFramework.Extensions;
+using AutomationFramework.DriverFactory;
 
 namespace Test.Application.PageObjects
 {
@@ -15,6 +16,8 @@ namespace Test.Application.PageObjects
            // PageFactory.InitElements(_driver, this);
             
         }
+
+
 
         protected override string PageUrl => "https://www.istockphoto.com/au";
         protected override string PageTitle => "Stock Images, Royalty-Free Pictures, Illustrations & Videos - iStock";
@@ -31,12 +34,15 @@ namespace Test.Application.PageObjects
         }
 
 
-        public void serachImages()
+        public ResultsPage serachImages()
         {
             ngDriver.Highlight(txtSearch, 1000);
             txtSearch.SendKeys("Goal");
             ngDriver.Highlight(btnSearch, 1000);
             btnSearch.Click();
+            return new ResultsPage(ngDriver);
+
+            
         }
 
         //div[@class='suggestions-inner-container full-width']

@@ -42,8 +42,10 @@ namespace Test.Application.Tests
         {
             var homePage = new HomePage(_ngDriver);
             homePage.NavigateTo();
-            homePage.serachImages();
+            var resultPage=homePage.serachImages();
+            //resultPage.NavigateTo();
 
+            resultPage.FindStrategy();
         }
         [Test]
         public void DeleteBooking()
