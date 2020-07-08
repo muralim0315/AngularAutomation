@@ -1,21 +1,22 @@
 ﻿using AutomationFramework.Browser;
 using AutomationFramework.Extensions;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Interactions;
+
 using Protractor;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Test.Application.PageObjects
 {
     class ResultsPage: Page
     {
+        Actions _actions;
+        IJavaScriptExecutor js;
         public ResultsPage(NgWebDriver ngdriver)
         {
             ngDriver = ngdriver;
             // PageFactory.InitElements(_driver, this);
+             _actions = new Actions(ngDriver.WrappedDriver);
+            js = (IJavaScriptExecutor)ngdriver;
 
         }
 
@@ -36,8 +37,12 @@ namespace Test.Application.PageObjects
         {
             ngDriver.Highlight(btnStrategy, 1000);
             btnStrategy.Click();
-            ngDriver.Highlight(btnNext, 4000);
+         
+            _actions.MoveToElement(btnNext).Build().Perform();
+            //ngDriver.ExecuteScript("arguments[0].scrollIntoView();", btnNext);
+            ngDriver.Highlight(btnNext, 5000);
             btnNext.Click();
+           
         }
     }
 }
